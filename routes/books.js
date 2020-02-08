@@ -76,6 +76,80 @@ router.post('/', async (req,res) =>
     }
 })
 
+router.get('/:id', async (req,res) => {
+    try
+    {
+        const book = await Book.findById(req.params.id)
+        const author = await Author.findById(book.author)
+        res.render('books/show', 
+        {
+            book: book,
+            author: author
+        })
+    }
+    catch(e)
+    {
+        console.log(e)
+        res.redirect('/books')
+    }
+})
+
+router.get('/:id/edit', async (req,res) => {
+    try
+    {
+        const book = await Book.findById(req.params.id)
+        const authors = await Author.find({})
+        res.render('books/edit.ejs', 
+        {
+            book: book,
+            authors: authors
+        })
+    }
+    catch(e)
+    {
+        console.log(e)
+        res.redirect('/books')
+    }
+})
+
+router.put('/:id', async (req,res) => {
+        try
+        {
+            const book = await Book.findById(req.params.id)
+            book.title = req.body.title
+            book.publishDate = new Date(req.body.publishDate)
+            book.pageCount = req.body.pageCount
+            author = req.body.author
+            description = req.body.description
+            saveCover(book, req.body.coverImage)
+            await book.save()
+            res.redirect(`/books/${book.id}`)
+        }
+        catch(err)
+        {
+             console.log(err)
+            // if(book.coverImageName != null) {
+            //     removeBookCover(book.coverImageName)
+            // }
+            
+            renderNewPage(res, book, true)
+        }
+})
+
+router.delete('/:id', async (req,res) => {
+    try
+    {
+        const book = await Book.findById(req.params.id)
+        await book.remove()
+        res.redirect('/books')
+    }
+    catch(e)
+    {
+        console.log(e)
+        res.redirect('/books')
+    }
+})
+
 
 function saveCover(book, coverEncoded) {
     if(coverEncoded == null) return

@@ -1,0 +1,17 @@
+<h2><%= book.title%></h2>
+<div>
+    <label>Publish Date: <%= book.publishDate.toISOString().split('T')[0]%></label>
+</div>
+<div>
+    <label>Author: <%= author.name%></label>
+    <a href="/authors/<%= author.id%>">View</a>
+</div>
+<div>
+    <label>Page Count: <%= book.pageCount%></label>
+</div>
+<div>
+    <img height="150" width="100" src="<%= book.coverImagePath %>">
+</div>
+<div>
+    <text>Description: <%= book.description%></text>
+</div>

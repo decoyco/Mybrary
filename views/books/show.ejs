@@ -1,10 +1,10 @@
-<h2><%= book.title%></h2>
+<h2  class="page-header"><%= book.title%></h2>
 <div>
     <label>Publish Date: <%= book.publishDate.toISOString().split('T')[0]%></label>
 </div>
 <div>
-    <label>Author: <%= author.name%></label>
-    <a href="/authors/<%= author.id%>">View</a>
+    <label>Author: <%= book.author.name%></label>
+    <a href="/authors/<%= book.author.id%>">View</a>
 </div>
 <div>
     <label>Page Count: <%= book.pageCount%></label>
@@ -15,3 +15,6 @@
 <div>
     <text>Description: <%= book.description%></text>
 </div>
+
+<a href="/books/<%= book.id%>/edit">Edit</a>
+<%- include('../partials/deleteform.ejs', {url: `/books/${book.id}`})%>

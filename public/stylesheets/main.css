@@ -1,6 +1,8 @@
 @import 'shared/fonts.css';
 @import 'shared/variables.css';
 @import 'shared/header.css';
+@import 'shared/buttons.css';
+
 :root {
     font-family: 'Ubuntu', 'sans-serif';
     font-size: 20px;

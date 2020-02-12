@@ -4,7 +4,7 @@
 </div>
 <div>
     <label>Author: <%= book.author.name%></label>
-    <a href="/authors/<%= book.author.id%>">View</a>
+    
 </div>
 <div>
     <label>Page Count: <%= book.pageCount%></label>
@@ -15,6 +15,8 @@
 <div>
     <text>Description: <%= book.description%></text>
 </div>
-
-<a href="/books/<%= book.id%>/edit">Edit</a>
-<%- include('../partials/deleteform.ejs', {url: `/books/${book.id}`})%>
+<div class="btn-row">
+    <a class="btn btn-primary" href="/authors/<%= book.author.id%>">View Author</a>
+    <a class="btn btn-primary" href="/books/<%= book.id%>/edit">Edit</a>
+    <%- include('../partials/deleteform.ejs', {url: `/books/${book.id}`})%>
+</div>
